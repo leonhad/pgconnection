@@ -1,0 +1,47 @@
+dnl
+dnl $Header$
+dnl
+dnl Autor: Edson Alves - edsomjr@gmail.com
+dnl Tamanho da tabulação: 4
+dnl Codificação: ISO 8859-1
+dnl $Date$
+dnl
+dnl Arquivo com as configurações para a construção do script configure.
+dnl
+dnl $Revision$
+
+dnl Inicializações necessárias
+AC_PREREQ(2.59)
+AC_INIT(aclocal.m4)
+AC_CONFIG_AUX_DIR(config)
+AM_INIT_AUTOMAKE(libconn, 0.2.0)
+AC_PROG_LIBTOOL
+
+dnl Arquivo de configuração gerado automaticamente
+AM_CONFIG_HEADER(include/config.h)
+
+dnl Encontra os programas necessários
+AC_PROG_CXX
+AC_PROG_CC
+AC_PROG_CPP
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_PROG_MAKE_SET
+
+dnl Arquivos gerados ao final do processo
+AC_OUTPUT( \
+Makefile \
+include/Makefile \
+src/Makefile \
+test/Makefile
+)
+
+dnl Repassa o diretório de configuração para os demais scripts
+AC_SUBST(ac_aux_dir)
+
+dnl Informações de saída
+echo
+echo Use o comando \'make\' para construir a libconn.
+echo
+
+dnl $Source$
