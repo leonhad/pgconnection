@@ -1,41 +1,33 @@
 /*
- * $Header$
- *
- * Autor: Leonardo Alves - leonhad@gmail
- * Tamanho da tabulação: 4
- * Codificação: ISO 8859-1
- * $Date$
- *
- * Implementação da classe que representa os objetos para acesso direto (DAO - Direct Acess Object).
- *
- * $Revision$
+ * ImplementaÃ§Ã£o da classe que representa os objetos para acesso direto (DAO - Direct Acess Object).
  */
 #include "dao.h"
 
 /**
  * \brief Construtor.
  *
- * \param conn		Conexão com a base de dados.
+ * \param conn		ConexÃ£o com a base de dados.
  *
- * \exception NULL_PARAMETER	Ocorre quando conn é um ponteiro nulo.
+ * \exception NULL_PARAMETER	Ocorre quando conn Ã© um ponteiro nulo.
  */
 DAO::DAO(Connection *conn) throw (SQLException)
 {
 	if (!conn)
+    {
 		throw SQLException("DAO::DAO(): invalid connection", NULL_PARAMETER);
+    }
 
 	this->conn = conn;
 }
 
 /**
- * \brief Converte a string dada para sequência de escape compatível com o banco de dados.
+ * \brief Converte a string dada para sequï¿½ncia de escape compatï¿½vel com o banco de dados.
  *
  * \param str	String a ser convertida.
  *
- * \return A string resultante da conversão.
+ * \return A string resultante da conversï¿½o.
  */
-string 
-DAO::escape(string str)
+string DAO::escape(string str)
 {
     if (str.empty()) {
         return "NULL";
@@ -46,7 +38,7 @@ DAO::escape(string str)
     string temp = "'";
     temp += u;
     temp += "'";
-    delete u;
+    delete [] u;
     return temp;
 }
 

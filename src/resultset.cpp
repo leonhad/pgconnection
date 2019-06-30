@@ -1,14 +1,5 @@
 /*
- * $Header$
- *
- * Autor: Leonardo Alves - leonhad@gmail
- * Tamanho da tabulação: 4
- * Codificação: ISO 8859-1
- * $Date$
- *
- * Implementação da classe que interpreta os possíveis resultados de um comando SQL.
- *
- * $Revision$
+ * ImplementaÃ§Ã£o da classe que interpreta os possÃ­veis resultados de um comando SQL.
  */
 #include "resultset.h"
 #include <cstdlib>
@@ -18,11 +9,11 @@
  *
  * \param result	Resultado de um comando SQL.
  *
- * \exception NULL_PARAMETER	Ocorre quando result é um ponteiro nulo.
+ * \exception NULL_PARAMETER	Ocorre quando result Ã© um ponteiro nulo.
  * \exception EMPTY_QUERY		Ocorre quando a string do comando enviado estava vazia.
- * \exception BAD_RESPONSE		Ocorre quando não foi possível entender a resposta do servidor.
- * \exception NONFATAL_ERROR	Ocorre quando há um erro não identificado, mas não fatal.
- * \exception FATAL_ERROR		Ocorre quando há um erro não identificado e fatal.
+ * \exception BAD_RESPONSE		Ocorre quando nÃ£o foi possÃ­vel entender a resposta do servidor.
+ * \exception NONFATAL_ERROR	Ocorre quando hÃ¡ um erro nÃ£o identificado, mas nÃ£o fatal.
+ * \exception FATAL_ERROR		Ocorre quando hÃ¡ um erro nÃ£o identificado e fatal.
  */
 ResultSet::ResultSet(PGresult *result) throw (SQLException)
 {
@@ -75,12 +66,11 @@ ResultSet::~ResultSet()
 }
 
 /**
- * \brief Move o cursor de leitura para a próxima linha.
+ * \brief Move o cursor de leitura para a prÃ³xima linha.
  *
- * \return 	Retorna <b>false</b> caso não exista uma próxima linha.
+ * \return 	Retorna <b>false</b> caso nÃ£o exista uma prÃ³xima linha.
  */
-bool 
-ResultSet::next()
+bool ResultSet::next()
 {
     _cursor++;
     if (_cursor < _lines) {
@@ -91,13 +81,13 @@ ResultSet::next()
 }
 
 /**
- * \brief Verifica se uma dada coluna é nula.
+ * \brief Verifica se uma dada coluna ï¿½ nula.
  *
- * \param index		Índice da coluna a ser verificada.
+ * \param index		ï¿½ndice da coluna a ser verificada.
  * 
- * \return	Retorna <b>true</b> se a coluna é nula, <b>false</b> caso contrário.
+ * \return	Retorna <b>true</b> se a coluna ï¿½ nula, <b>false</b> caso contrï¿½rio.
  * 
- * \exception INDEX_OUT_OF_BOUNDS		Ocorre quando o índice indicado aponta para uma
+ * \exception INDEX_OUT_OF_BOUNDS		Ocorre quando o ï¿½ndice indicado aponta para uma
  *										coluna inexistente.
  */
 bool ResultSet::isNull(int index) throw (SQLException)
@@ -112,13 +102,13 @@ bool ResultSet::isNull(int index) throw (SQLException)
 }
 
 /**
- * \brief Verifica se uma dada coluna é nula.
+ * \brief Verifica se uma dada coluna ï¿½ nula.
  *
  * \param columnName		Nome da coluna a ser verificada.
  * 
- * \return	Retorna <b>true</b> se a coluna é nula, <b>false</b> caso contrário.
+ * \return	Retorna <b>true</b> se a coluna ï¿½ nula, <b>false</b> caso contrï¿½rio.
  * 
- * \exception INVALID_COLUMN			Ocorre quando o nome dado não indica uma coluna válida.
+ * \exception INVALID_COLUMN			Ocorre quando o nome dado nï¿½o indica uma coluna vï¿½lida.
  */
 bool ResultSet::isNull(string columnName) throw (SQLException)
 {
@@ -128,16 +118,15 @@ bool ResultSet::isNull(string columnName) throw (SQLException)
 }
 
 /**
- * \brief Obtém o valor de uma dada coluna como string.
+ * \brief Obtï¿½m o valor de uma dada coluna como string.
  *
  * \param columnName		Nome da coluna.
  * 
  * \return	Retorna o valor da coluna como string.
  * 
- * \exception INVALID_COLUMN			Ocorre quando o nome dado não indica uma coluna válida.
+ * \exception INVALID_COLUMN			Ocorre quando o nome dado nï¿½o indica uma coluna vï¿½lida.
  */
-string
-ResultSet::stringValue(string columnName) throw (SQLException)
+string ResultSet::stringValue(string columnName) throw (SQLException)
 {
     string value;
 
@@ -147,20 +136,21 @@ ResultSet::stringValue(string columnName) throw (SQLException)
 	} catch (SQLException& e) {
 		throw e;
 	}
+
+	return value;
 }
 
 /**
- * \brief Obtém o valor de uma dada coluna como string.
+ * \brief Obtï¿½m o valor de uma dada coluna como string.
  *
- * \param columnIndex		Índice da coluna.
+ * \param columnIndex		ï¿½ndice da coluna.
  * 
  * \return	Retorna o valor da coluna como string.
  * 
- * \exception INDEX_OUT_OF_BOUNDS		Ocorre quando o índice indicado aponta para uma
+ * \exception INDEX_OUT_OF_BOUNDS		Ocorre quando o ï¿½ndice indicado aponta para uma
  *										coluna inexistente.
  */
-string
-ResultSet::stringValue(int columnIndex) throw (SQLException)
+string ResultSet::stringValue(int columnIndex) throw (SQLException)
 {
 	bool nullColumn;
 
@@ -177,16 +167,15 @@ ResultSet::stringValue(int columnIndex) throw (SQLException)
 }
 
 /**
- * \brief Obtém o valor de uma dada coluna como int.
+ * \brief Obtï¿½m o valor de uma dada coluna como int.
  *
  * \param columnName		Nome da coluna.
  * 
  * \return	Retorna o valor da coluna como int.
  * 
- * \exception INVALID_COLUMN			Ocorre quando o nome dado não indica uma coluna válida.
+ * \exception INVALID_COLUMN			Ocorre quando o nome dado nï¿½o indica uma coluna vï¿½lida.
  */
-int 
-ResultSet::intValue(string columnName) throw (SQLException)
+int ResultSet::intValue(string columnName) throw (SQLException)
 {	
 	string value;
 
@@ -196,7 +185,7 @@ ResultSet::intValue(string columnName) throw (SQLException)
 		throw e;
 	}
 
-	// TODO verificar os possíveis erros na conversão string - int
+	// TODO verificar os possï¿½veis erros na conversï¿½o string - int
 	if (value == "")
 		return 0;
 	else
@@ -204,17 +193,16 @@ ResultSet::intValue(string columnName) throw (SQLException)
 }
 
 /**
- * \brief Obtém o valor de uma dada coluna como int.
+ * \brief Obtï¿½m o valor de uma dada coluna como int.
  *
- * \param columnIndex		Índice da coluna.
+ * \param columnIndex		ï¿½ndice da coluna.
  * 
  * \return	Retorna o valor da coluna como int.
  * 
- * \exception INDEX_OUT_OF_BOUNDS		Ocorre quando o índice indicado aponta para uma
+ * \exception INDEX_OUT_OF_BOUNDS		Ocorre quando o ï¿½ndice indicado aponta para uma
  *										coluna inexistente.
  */
-int 
-ResultSet::intValue(int columnIndex) throw (SQLException)
+int ResultSet::intValue(int columnIndex) throw (SQLException)
 {
     string value;
 
@@ -224,7 +212,7 @@ ResultSet::intValue(int columnIndex) throw (SQLException)
 		throw e;
 	}
 
-	// TODO verificar os possíveis erros na conversão string - int
+	// TODO verificar os possï¿½veis erros na conversï¿½o string - int
 	if (value == "")
 		return 0;
 	else	
@@ -232,16 +220,15 @@ ResultSet::intValue(int columnIndex) throw (SQLException)
 }
 
 /**
- * \brief Obtém o valor de uma dada coluna como float.
+ * \brief Obtï¿½m o valor de uma dada coluna como float.
  *
  * \param columnName		Nome da coluna.
  * 
  * \return	Retorna o valor da coluna como float.
  * 
- * \exception INVALID_COLUMN			Ocorre quando o nome dado não indica uma coluna válida.
+ * \exception INVALID_COLUMN			Ocorre quando o nome dado nï¿½o indica uma coluna vï¿½lida.
  */
-float 
-ResultSet::floatValue(string columnName) throw (SQLException)
+float ResultSet::floatValue(string columnName) throw (SQLException)
 {
     string value;
 	
@@ -251,7 +238,7 @@ ResultSet::floatValue(string columnName) throw (SQLException)
 		throw e;
 	}
 
-	// TODO verificar os possíveis erros na conversão string - float
+	// TODO verificar os possï¿½veis erros na conversï¿½o string - float
 	if (value == "")
 		return 0.0f;
 	else
@@ -259,17 +246,16 @@ ResultSet::floatValue(string columnName) throw (SQLException)
 }
 
 /**
- * \brief Obtém o valor de uma dada coluna como float.
+ * \brief Obtï¿½m o valor de uma dada coluna como float.
  *
- * \param columnIndex		Índice da coluna.
+ * \param columnIndex		ï¿½ndice da coluna.
  * 
  * \return	Retorna o valor da coluna como float.
  * 
- * \exception INDEX_OUT_OF_BOUNDS		Ocorre quando o índice indicado aponta para uma
+ * \exception INDEX_OUT_OF_BOUNDS		Ocorre quando o ï¿½ndice indicado aponta para uma
  *										coluna inexistente.
  */
-float 
-ResultSet::floatValue(int columnIndex) throw (SQLException)
+float ResultSet::floatValue(int columnIndex) throw (SQLException)
 {
     string value;
 	
@@ -279,7 +265,7 @@ ResultSet::floatValue(int columnIndex) throw (SQLException)
 		throw e;
 	}
 
-	// TODO verificar os possíveis erros na conversão string - float
+	// TODO verificar os possï¿½veis erros na conversï¿½o string - float
 	if (value == "")
 		return 0.0f;
 	else
