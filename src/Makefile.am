@@ -9,6 +9,4 @@ libconn_la_SOURCES = 	\
 
 libconn_la_LIBADD =
 
-AM_CPPFLAGS = -I/usr/include/postgresql
-
-AM_CFLAGS = -ggdb -pedantic -Wall -fPIC
+AM_CPPFLAGS = -I/usr/include/postgresql -ggdb -pedantic -Wall -fPIC
