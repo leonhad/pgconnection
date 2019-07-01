@@ -14,6 +14,7 @@ config.status
 *.Po
 *.o
 *.a
+.libs
 *.dSYM
 autom4te.cache
 Makefile
